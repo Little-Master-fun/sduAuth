@@ -1,4 +1,4 @@
-# 山东大学统一身份认证登入
+# 山东大学统一身份认证登入(前端版，axios + vite)
 
 这是调用山东大学统一身份认证的前端代码示例，主要运用了 vite 的代理服务器进行跨域问题解决。该配置仅用于开发端调试，如需上线服务端可运用 Nginx 的反向代理来完成，原理大致相同。
 
@@ -102,3 +102,16 @@ server:{
 ```
 
 这里配置路径为 /aut 的请求都会被自动代理，依情况自行修改，记得同时修改 Auth（） 函数
+
+## 生产环境配置
+
+建议采用Nginx的反向代理，简单高效。在配置文件中添加
+
+```Ngx
+location /aut {
+        proxy_pass https://pass.sdu.edu.cn/cas/restlet/tickets;  # 转发 /aut 请求到 SDU CAS 服务
+        proxy_set_header Host pass.sdu.edu.cn;
+        proxy_ssl_verify off;  # 如果有 HTTPS 证书问题，可以关闭验证（生产环境谨慎使用）
+        proxy_redirect off;   # 不修改重定向头部
+    }
+```
