@@ -20,7 +20,7 @@ export default defineConfig({
     port: 5173,
     proxy: {  
       '/aut': {
-        target: 'https://pass.sdu.edu.cn/cas/restlet/tickets',
+        target: 'https://pass.sdu.edu.cn/cas',
         changeOrigin: true, //改变请求源
         secure: false,  // 不验证 HTTPS 证书
         rewrite: (path) => path.replace(/^\/aut/, '') //重写路径
