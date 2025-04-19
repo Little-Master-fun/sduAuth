@@ -11,7 +11,12 @@ export const Auth = async (usrData, Success, Fail, Other = () => {}) => {
       "/aut/restlet/tickets",
       `username=${encodeURIComponent(sduid)}&password=${encodeURIComponent(
         password
-      )}`
+      )}`,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
     );
 
     const ticket = tgtResponse.data;
