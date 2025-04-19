@@ -9,14 +9,7 @@ export const Auth = async (usrData, Success, Fail, Other = () => {}) => {
     // 获取TGT票据
     const tgtResponse = await axios.post(
       "/aut/restlet/tickets",
-      `username=${encodeURIComponent(sduid)}&password=${encodeURIComponent(
-        password
-      )}`,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
+      `username=${sduid}&password=${password}`
     );
 
     const ticket = tgtResponse.data;
